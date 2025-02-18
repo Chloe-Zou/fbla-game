@@ -1,1 +1,3 @@
 # fbla-game
+
+## Logic Planning
