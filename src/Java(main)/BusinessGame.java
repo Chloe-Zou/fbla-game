@@ -27,7 +27,7 @@ public class BusinessGame {
         customer = new Customer(5000, false);
         gameFunctions = new GameFunctions(50); 
 
-        // Game introduction
+        // Game introduction/Situation
         System.out.println("Welcome to the Business Game!");
         System.out.println("You are the owner of a startup tech business, and you have the responsibility to make the correct decisions to lead your business to success!");
         System.out.println("\n--- Your Business Situation ---");
@@ -69,7 +69,7 @@ public class BusinessGame {
                     break;
                 case 3:
                     System.out.println("What would you like to name your new product?");
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     String newProduct = scanner.nextLine();
                     launchNewProduct(newProduct);
                     break;
@@ -93,13 +93,10 @@ public class BusinessGame {
                     System.out.println("Invalid choice. Try again.");
                     break;
             }
-
             // Update game state
             updateGameState();
-
             // Trigger random event
             triggerRandomEvent();
-
             // Show scores after each choice
             checkStatus();
         }
@@ -131,8 +128,10 @@ public class BusinessGame {
         }
 
         // Revenue calculation
-        int revenue = 1000 + (amount * 10); // Revenue increases based on the price raise
-        business.buy("Smart Devices", -revenue); // Add revenue to funds
+        // Revenue increases based on the price raise
+        int revenue = 1000 + (amount * 10); 
+        // Add revenue to funds
+        business.buy("Smart Devices", -revenue);
         System.out.println("Revenue: $" + revenue);
     }
 
@@ -146,11 +145,13 @@ public class BusinessGame {
         System.out.println("\nYou lowered the price of your products by $" + amount + ".");
 
         // Risk of reduced profit margins
-        int riskFactor = random.nextInt(100); // Random risk factor (0-99)
-        if (riskFactor < 30) { // 30% chance of negative outcome
+        // random risk factor(0-99)
+        int riskFactor = random.nextInt(100); 
+        // chance of risk 30%
+        if (riskFactor < 30) { 
             System.out.println("The price reduction has severely impacted your profit margins.");
             System.out.println("You struggle to cover production costs, and your funds take a hit.");
-            business.buy("Smart Devices", 1000); // Simulate increased costs
+            business.buy("Smart Devices", 1000); 
         } else {
             System.out.println("Customers appreciate the lower prices and continue to support your business.");
             System.out.println("Your popularity increases slightly as customers feel they're getting a good deal.");
@@ -158,8 +159,8 @@ public class BusinessGame {
         }
 
         // Revenue calculation
-        int revenue = 2000 + (amount * 20); // Revenue increases based on the price reduction
-        business.buy("Smart Devices", -revenue); // Add revenue to funds
+        int revenue = 2000 + (amount * 20); 
+        business.buy("Smart Devices", -revenue); 
         System.out.println("Revenue: $" + revenue);
     }
 
@@ -168,8 +169,10 @@ public class BusinessGame {
         System.out.println("\nYou launched a new product: " + newProduct + "!");
 
         // Risk of product failure
-        int riskFactor = random.nextInt(100); // Random risk factor (0-99)
-        if (riskFactor < 20) { // 20% chance of failure
+        // Random risk factor (0-99)
+        int riskFactor = random.nextInt(100); 
+        // 20% chance of failure
+        if (riskFactor < 20) { 
             System.out.println("The new product launch was a disaster! Customers complain about quality issues.");
             System.out.println("Your popularity takes a hit, and sales drop significantly.");
             business.setPopularity(business.getPopularity() - 15);
@@ -196,8 +199,9 @@ public class BusinessGame {
         System.out.println("\nYou successfully secured an investment of $" + amount + "!");
 
         // Risk of investor interference
-        int riskFactor = random.nextInt(100); // Random risk factor (0-99)
-        if (riskFactor < 40) { // 40% chance of negative outcome
+        int riskFactor = random.nextInt(100); 
+        // 20% chance of failure
+        if (riskFactor < 40) { 
             System.out.println("The investor demands a say in your business decisions, limiting your freedom.");
             System.out.println("Your popularity drops as customers sense instability.");
             business.setPopularity(business.getPopularity() - 10);
@@ -213,16 +217,18 @@ public class BusinessGame {
             System.out.println("Invalid amount. Please choose a value between 10 and 100.");
             return;
         }
-
-        int revenue = unitsSold * business.getPrice(); // Revenue = units sold * price per unit
-        business.buy("Smart Devices", -revenue); // Add revenue to funds
+        
+         // Revenue = units sold * price per unit
+        int revenue = unitsSold * business.getPrice(); 
+        business.buy("Smart Devices", -revenue); 
         System.out.println("\nYou sold " + unitsSold + " units of your product, earning $" + revenue + "!");
 
         // Risk of overproduction
-        int riskFactor = random.nextInt(100); // Random risk factor (0-99)
-        if (riskFactor < 10) { // 10% chance of negative outcome
+        int riskFactor = random.nextInt(100); 
+        // 10% chance of negative outcome
+        if (riskFactor < 10) { 
             System.out.println("You overproduced and now have excess inventory. Storage costs are eating into your profits.");
-            business.buy("Smart Devices", 500); // Simulate storage costs
+            business.buy("Smart Devices", 500); 
         } else {
             System.out.println("Sales are steady, and your business is thriving.");
         }
@@ -243,7 +249,8 @@ public class BusinessGame {
         business.setPopularity(gameFunctions.getPopularity());
 
         // Random competitor actions
-        int competitorAction = random.nextInt(3); // 0: no action, 1: raise price, 2: lower price
+        // 0: no action, 1: raise price, 2: lower price
+        int competitorAction = random.nextInt(3); 
         if (competitorAction == 1) {
             competition.raisePrice(5);
             System.out.println("\nYour competition raised their prices!");
@@ -254,14 +261,15 @@ public class BusinessGame {
 
         // Check for bankruptcy
         if (business.getFunds() < 0) {
-            player.buy(0); // Trigger bankruptcy
+            player.buy(0); 
         }
     }
 
     private void triggerRandomEvent() {
-        int eventChance = random.nextInt(100); // Random chance of an event (0-99)
-        if (eventChance < 30) { // 30% chance of a random event
-            int eventType = random.nextInt(4); // 0-3: different types of events
+        int eventChance = random.nextInt(100); 
+         // 30% chance of a random event, 3 types of events
+        if (eventChance < 30) {
+            int eventType = random.nextInt(4); 
             switch (eventType) {
                 case 0:
                     System.out.println("\n--- Random Event: Competitor Launches New Product ---");
@@ -280,7 +288,7 @@ public class BusinessGame {
                     System.out.println("\n--- Random Event: Supply Chain Disruption ---");
                     System.out.println("A global supply chain disruption has increased your production costs.");
                     System.out.println("Your funds take a hit, and your profit margins shrink.");
-                    business.buy("Smart Devices", 2000); // Simulate increased costs
+                    business.buy("Smart Devices", 2000);
                     break;
                 case 3:
                     System.out.println("\n--- Random Event: Positive Media Coverage ---");
