@@ -10,7 +10,8 @@ public class Business {
         this.funds = funds;
         this.popularity = popularity;
         this.products = products;
-        this.price = 100; // Default price
+        // Default price
+        this.price = 100; 
     }
 
     public void raisePrice(int amount) {
@@ -51,7 +52,6 @@ public class Business {
         return price;
     }
 
-    // Add this method
     public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
